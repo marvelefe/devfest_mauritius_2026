@@ -1,0 +1,42 @@
+[project]
+name = "trustcards"
+version = "1.0.0"
+description = "DevFest Mauritius 2026 demo: securing A2A agent-to-agent calls with signed Agent Cards"
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk[a2a]==2.10.0",
+    "a2a-sdk[signing]==1.1.5",
+    "pyjwt[crypto]==2.15.0",
+    "httpx==0.28.1",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.16.9",
+    "black==26.5.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["trustcards"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::UserWarning"]
